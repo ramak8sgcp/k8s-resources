@@ -8,7 +8,7 @@ spec:
     image: nginx
     envFrom:
     - configMapRef:
-        name: nginx-config
+        name: nginx-configl
     # env: 
     # - name: course
     #   valueFrom:
