@@ -17,7 +17,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: ebs-static
 spec:
-  storageClassName: ""
+  storageClassName: "" # Empty string must be explictity set otherwise default storageClass will be set
   volumeName: ebs-static
   accessModes:
     - ReadWriteOnce
@@ -29,14 +29,11 @@ apiVersion: v1
 kind: Pod 
 metadata: 
   name: ebs-static 
-  labels: 
-    purpose: ebs-static
 spec:
-  nodeSelector: topology.kubernetes.io/zone=us-east-1c
   containers:
   - name: nginx
     image: nginx 
-    volumeMounts:
+    volumeMounts: #docker run -v hostpath:containerpath
     - name: ebs-static
       mountPath: /usr/share/nginx/html
   volumes:
