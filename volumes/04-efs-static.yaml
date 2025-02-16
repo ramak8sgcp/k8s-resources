@@ -20,7 +20,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: expense-efs
 spec:
-  volume Name: expense-efs
+  volumeName: expense-efs
   storageClassName: ""
   resources:
     requests:
