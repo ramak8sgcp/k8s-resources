@@ -1,33 +1,31 @@
-apiVersion: v1 
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: expense-efs
 spec:
   capacity:
-    storage: 5Gi 
+    storage: 5Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
-  csi: 
-    driver: efs.cis.aws.com
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
     volumeHandle: fs-06a79e774c57e785b
-
 ---
-apiVersion: v1 
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: expense-efs
 spec:
   volumeName: expense-efs
+  accessModes:
+    - ReadWriteOnce
   storageClassName: ""
   resources:
     requests:
       storage: 5Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
 ---
 apiVersion: v1
 kind: Pod
@@ -39,16 +37,16 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    volumeMounts: # docker run -v hostpath:containerpath
-    - name: expense-efs 
+    volumeMounts: # docker run -v hostpath:contaierpath
+    - name: expense-efs
       mountPath: /usr/share/nginx/html
-  volumes: 
+  volumes:
   - name: expense-efs
-    persistentVolumeClaim: 
+    persistentVolumeClaim:
       claimName: expense-efs
 ---
-apiVersion: v1 
 kind: Service
+apiVersion: v1
 metadata:
   name: nginx
 spec:
@@ -58,9 +56,6 @@ spec:
   ports:
   - name: nginx-svc-port
     protocol: TCP
-    port: 80
-    targetPort: 80
+    port: 80 # service port
+    targetPort: 80 # container port
     nodePort: 30007
-
-
-
