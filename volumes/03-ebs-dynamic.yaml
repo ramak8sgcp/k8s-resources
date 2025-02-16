@@ -4,6 +4,7 @@ metadata:
   name: ebs-dynamic 
 spec: 
   storageClassName: "expense-ebs"
+  volumeName: ebs-static
   accessModes:
   - ReadWriteOnce
 resources:
@@ -39,7 +40,7 @@ spec:
   selector: 
     purpose: ebs-static
   ports:
-  - name: nginx-svc-port
+  - name: nginx-svc-port 
     protocol: TCP
     port: 80
     targetPort: 80
