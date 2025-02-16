@@ -3,9 +3,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: efs-dynamic
 spec:
-  storageClassName: "efs-dynamic"
+  storageClassName: "efs-expense"
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
@@ -17,8 +17,6 @@ metadata:
   labels:
     purpose: efs-dynamic
 spec:
-  # nodeSelector:
-  #   topology.kubernetes.io/zone: us-east-1a
   containers:
   - name: nginx
     image: nginx
@@ -44,6 +42,3 @@ spec:
     port: 80 # service port
     targetPort: 80 # container port
     nodePort: 30007
-
-
-# Successfully executed !!!
