@@ -44,3 +44,18 @@ spec:
   - name: ebs-static
     persistentVolumeClaim:
       claimName: ebs-static 
+---
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: nginx 
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-static
+ports:
+- name: nginx-svc-port
+  protocol: TCP
+  port: 80
+  targetPort: 80 
+  nodeport: 30007
