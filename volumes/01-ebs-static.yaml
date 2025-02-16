@@ -24,3 +24,22 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: ebs-static 
+  labels: 
+    purpose: ebs-static
+spec:
+  nodeSelector: topology.kubernetes.io/zone=us-east-1c
+  containers:
+  - name: nginx
+    image: nginx 
+    volumeMounts:
+    - name: ebs-static
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: ebs-static
+    persistentVolumeClaim:
+      claimName: ebs-static 
