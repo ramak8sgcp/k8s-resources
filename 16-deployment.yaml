@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment 
 metadata:
   name: nginx
-  labels:
+  labels: # these are replicaset labels
     app: nginx 
     tier: frontend
 spec:
-  replicas: 3
+  replicas: 3 # modify replicas according to your requirement
   selector:
-    matchLabels:
+    matchLabels:  # these are used to select the pod to create replicas
       app: nginx
       tier: frontend
-  template:
+  template: # this is pod defination
     metadata:
-      labels:
+      labels: # these labels belongs to pod
         app: nginx 
         tier: frontend
     spec:
