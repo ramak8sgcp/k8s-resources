@@ -12,14 +12,14 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-06a79e774c57e785b
+    volumeHandle: fs-0b85c5652877f5318    # change with your volumes ID
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: expense-efs
 spec:
-  volumeName: expense-efs
+  volumeName: expense-efs   #reffer pv(expense-efs) here
   accessModes:
     - ReadWriteOnce
   storageClassName: ""
