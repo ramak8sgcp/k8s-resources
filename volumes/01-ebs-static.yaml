@@ -10,7 +10,7 @@ spec:
   csi: 
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-004b472bb35944e8d   #volume shold be change as per you created
+    volumeHandle: vol-01e3adc2ad65b7aab  #volume shold be change as per you created
 ---
 apiVersion: v1 
 kind: PersistentVolumeClaim 
@@ -33,7 +33,7 @@ metadata:
     purpose: ebs-static 
 spec:
   nodeSelector: 
-    topology.kubernetes.io/zone: us-east-1a   # zone should be change as per your volume created
+    topology.kubernetes.io/zone: us-east-1b   # zone should be change as per your volume created
   containers:
   - name: nginx
     image: nginx 
